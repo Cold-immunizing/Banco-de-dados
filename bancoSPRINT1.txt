@@ -1,0 +1,33 @@
+create database imuncold;
+use imuncold;
+
+create table usuario (
+idusuario int primary key auto_increment,
+nome varchar(50),
+email varchar(50),
+telefone varchar(50),
+senha varchar(50));
+
+create table sensores (
+idsensor int primary key auto_increment,
+empresa int);
+
+create table registro (
+idregistro int primary key auto_increment,
+sensor int,
+temperatura varchar(4),
+dataregistro datetime default current_timestamp);
+
+insert into usuario (nome, email, telefone, senha)
+values ('Empresa A', 'empresaA@hotmail.com', '1129322323', '12345678'),
+('Empresa B', 'empresaB@gmail.com', '1138232934', '87654321');
+
+insert into sensores (empresa)
+values ('1'),
+('2');
+
+insert into registro (sensor, temperatura)
+values ('2', '-50'),
+('1', '-70');
+
+select * from registro;
