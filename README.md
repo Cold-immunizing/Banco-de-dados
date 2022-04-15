@@ -1,2 +1,2 @@
 # Banco-de-dados
-Banco de dados da empresa cold immunizing
+Banco de dados da empresa ImmunCold
