@@ -1,36 +1,16 @@
 create database Immuncold;
 use Immuncold;
 
-create table cliente (
-id_cliente int not null primary key auto_increment,
-nome_cliente varchar(50),
-cnpj varchar(25),
-cep varchar(50),
-numero int,
-complemento varchar(25),
-telefone_fixo varchar(14),
-email varchar(75),
-senha varchar(25));
-
-insert into cliente
-values (null, 'Pfizer', '1231232', '1232323', '5', null, '23234532', 'pfizer@hotmail.com', '1234'),
-(null, 'Coronavac', '4545454', '4545454', '2', 'b', '65643434', 'coronavac@gmail.com', '4321');
-
-select * from cliente;
-
-create table usuario (
-id_usuario int not null primary key auto_increment,
-nome_usuario varchar(50),
-telefone_celular varchar(15),
-fk_cliente int,
-foreign key (fk_cliente)
-references cliente(id_cliente));
-
-insert into usuario
-values (null, 'Jose', '1232452', '1'),
-(null, 'Joana', '1232453', '1'),
-(null, 'Mane', '1232852', '2'),
-(null, 'Juliana', '1239452', '2');
+create table empresa (
+id_empresa int primary key auto_increment,
+nome varchar(50) not null,
+representante varchar(50) not null,
+cnpj varchar(25) not null,
+cep varchar(50) not null,
+endereco varchar(150),
+telefone varchar(14),
+email varchar(100),
+senha varchar(10));
 
 create table localidade (
 id_localidade int not null primary key auto_increment,
@@ -38,26 +18,14 @@ tipo varchar(13),
 check (tipo = 'Transporte' or tipo = 'Armazenamento'),
 identificador varchar(25));
 
-insert into localidade
-values (null, 'Transporte', 'ABC0001'),
-(null, 'Transporte', 'DEF0002'),
-(null, 'Armazenamento', 'ABC0002'),
-(null, 'Armazenamento', 'DEF0001');
-
 create table sensor (
 id_sensor int not null primary key auto_increment,
-fk_cliente int,
-foreign key (fk_cliente)
-references cliente(id_cliente),
+fk_empresa int,
+foreign key (fk_empresa)
+references empresa(id_empresa),
 fk_localidade int,
 foreign key (fk_localidade)
 references localidade(id_localidade));
-
-insert into sensor 
-values (null, 1 , 1),
-(null, 4, 2),
-(null, 2, 3),
-(null, 3, 4);
 
 create table parametro (
 id_parametro int primary key,
@@ -75,25 +43,3 @@ references sensor(id_sensor),
 fk_parametro int,
 foreign key (fk_parametro)
 references parametro(id_parametro));
-
-insert into registro (id_registro, registro, alerta, fk_sensor)
-values (null, '-99', 'perigo', 3),
-(null, '-20', 'alerta', 1),
-(null, '-50', 'estável', 4);
-
-
-
-delete from registro;
-
-select * from cliente;
-select * from localidade;
-select * from sensor;
-select * from usuario;
-select * from registro;
-
-select * from sensor inner join localidade on id_localidade = fk_localidade;
-
-select * from registro inner join sensor on fk_sensor = id_sensor;
-
- 
- 
