@@ -2,44 +2,45 @@ create database Immuncold;
 use Immuncold;
 
 create table empresa (
-id_empresa int primary key auto_increment,
+id_empresa int not null primary key auto_increment,
 nome varchar(50) not null,
 representante varchar(50) not null,
 cnpj varchar(25) not null,
-cep varchar(50) not null,
+cep varchar(50),
 endereco varchar(150),
-telefone varchar(14),
-email varchar(100),
-senha varchar(10));
+telefone varchar(14) not null,
+email varchar(100) not null,
+senha varchar(10)not null);
 
 create table localidade (
 id_localidade int not null primary key auto_increment,
-tipo varchar(13), 
+tipo varchar(13) not null,
 check (tipo = 'Transporte' or tipo = 'Armazenamento'),
-identificador varchar(25));
+endereco_localidade varchar(150) not null,
+identificador varchar(25) not null);
 
 create table sensor (
 id_sensor int not null primary key auto_increment,
-fk_empresa int,
+fk_empresa int not null,
 foreign key (fk_empresa)
 references empresa(id_empresa),
-fk_localidade int,
+fk_localidade int not null,
 foreign key (fk_localidade)
 references localidade(id_localidade));
 
 create table parametro (
-id_parametro int primary key,
-nome_vacina varchar(50),
-temp_max int,
-temp_min int);
+id_parametro int not null primary key auto_increment,
+nome_vacina varchar(50) not null,
+temp_max int not null,
+temp_min int not null);
 
 create table registro (
 id_registro int not null primary key auto_increment,
-registro decimal,
-data_horario datetime default current_timestamp,
-fk_sensor int,
+registro decimal not null,
+data_horario datetime default current_timestamp not null,
+fk_sensor int not null,
 foreign key (fk_sensor)
 references sensor(id_sensor),
-fk_parametro int,
+fk_parametro int not null,
 foreign key (fk_parametro)
 references parametro(id_parametro));
