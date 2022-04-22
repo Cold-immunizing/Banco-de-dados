@@ -10,7 +10,7 @@ cep varchar(50),
 endereco varchar(150),
 telefone varchar(14) not null,
 email varchar(100) not null,
-senha varchar(10)not null);
+senha varchar(25)not null);
 
 create table localidade (
 id_localidade int not null primary key auto_increment,
