@@ -41,6 +41,12 @@ data_horario datetime default current_timestamp not null,
 fk_sensor int not null,
 foreign key (fk_sensor)
 references sensor(id_sensor),
+fk_empresa int not null,
+foreign key (fk_empresa)
+references empresa(id_empresa),
+fk_localidade int not null,
+foreign key (fk_localidade)
+references localidade(id_localidade),
 fk_parametro int not null,
 foreign key (fk_parametro)
 references parametro(id_parametro));
