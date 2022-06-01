@@ -6,7 +6,6 @@ id_empresa int not null primary key auto_increment,
 nome varchar(255) not null,
 representante varchar(255) not null,
 cnpj varchar(25) not null unique,
-cep varchar(50),
 endereco varchar(150),
 telefone varchar(14) not null unique,
 email varchar(100) not null unique,
@@ -15,7 +14,6 @@ senha varchar(25)not null) auto_increment = 1000;
 
 #inserir primeiros dados no banco tabela Empresa
 insert into empresa values (null, 'teste1', 'quaquer1', '1231231123', '1231231231', 'Rua sakjdhaskda', '1193232423', 'teste1@gmail.com', '1234');
-
 
 create table usuario (
 id_usuario int not null primary key auto_increment,
@@ -42,12 +40,12 @@ insert into localidade values (null, 'Armazenamento', 'askjdasdhajk', 'A');
 
 create table parametro (
 id_parametro int not null primary key auto_increment,
+nome_vacina varchar(50),
 temp_max int not null,
 temp_min int not null);
 
 create table sensor (
 id_sensor int not null primary key auto_increment,
-nome_vacina varchar(50),
 fk_empresa int not null,
 foreign key (fk_empresa)
 references empresa(id_empresa),
@@ -55,7 +53,8 @@ fk_localidade int not null,
 foreign key (fk_localidade)
 references localidade(id_localidade),
 fk_parametro int,
-foreign key (fk_parametro) references parametro(id_parametro));
+foreign key (fk_parametro)
+references parametro(id_parametro));
 
 
 #inserir primeiros dados no banco tabela sensor
